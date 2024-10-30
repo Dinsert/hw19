@@ -7,11 +7,15 @@ public class DiscountedProduct extends Product {
 
     public DiscountedProduct(String nameProduct, int basePrise, int wholePercentDiscount) {
         super(nameProduct);
+        checkBasePriceAndWholePercentDiscount(basePrise,wholePercentDiscount);
+        this.basePrise = basePrise;
+        this.wholePercentDiscount = wholePercentDiscount;
+    }
+
+    private void checkBasePriceAndWholePercentDiscount(int basePrise, int wholePercentDiscount) {
         if (basePrise <= 0 && wholePercentDiscount < 0 || wholePercentDiscount > 100) {
             throw new IllegalArgumentException("Неверная цена или процент скидки");
         }
-        this.basePrise = basePrise;
-        this.wholePercentDiscount = wholePercentDiscount;
     }
 
     @Override

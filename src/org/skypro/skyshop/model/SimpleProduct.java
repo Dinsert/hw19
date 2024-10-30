@@ -6,10 +6,14 @@ public class SimpleProduct extends Product {
 
     public SimpleProduct(String nameProduct, int simplePrice) {
         super(nameProduct);
+        checkSimplePrice(simplePrice);
+        this.simplePrice = simplePrice;
+    }
+
+    private void checkSimplePrice(int simplePrice) {
         if (simplePrice <= 0) {
             throw new IllegalArgumentException("Неверная цена");
         }
-        this.simplePrice = simplePrice;
     }
 
     @Override

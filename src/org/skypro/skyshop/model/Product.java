@@ -7,19 +7,23 @@ public abstract class Product implements Searchable {
     private final String nameProduct;
 
     public Product(String nameProduct) {
-        if (isNull(nameProduct) || nameProduct.isBlank()) {
-            throw new IllegalArgumentException("Неверное имя продукта");
-        }
+        checkNameProduct(nameProduct);
         this.nameProduct = nameProduct;
     }
 
-    public String getNameProduct() {
-        return nameProduct;
+    private void checkNameProduct(String nameProduct) {
+        if (isNull(nameProduct) || nameProduct.isBlank()) {
+            throw new IllegalArgumentException("Неверное имя продукта");
+        }
     }
 
     public abstract int getPrice();
 
     public abstract boolean isSpecial();
+
+    public String getNameProduct() {
+        return nameProduct;
+    }
 
     @Override
     public String getContentType() {
@@ -29,18 +33,5 @@ public abstract class Product implements Searchable {
     @Override
     public String getName() {
         return nameProduct;
-    }
-}
-
-enum TypeContent {
-    PRODUCT("PRODUCT"), ARTICLE("ARTICLE");
-    private String type;
-
-    TypeContent(String type) {
-        this.type = type;
-    }
-
-    public String getType() {
-        return type;
     }
 }
