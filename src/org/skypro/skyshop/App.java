@@ -1,6 +1,5 @@
 package org.skypro.skyshop;
 
-import java.util.Arrays;
 import org.skypro.skyshop.model.Article;
 import org.skypro.skyshop.service.BestResultNotFound;
 import org.skypro.skyshop.service.ProductBasket;
@@ -31,6 +30,11 @@ public class App {
         }
 
         productBasket.printBasketContents();
+        System.out.println();
+        System.out.println(productBasket.removeProductByBasket("Course C++"));
+        System.out.println();
+        productBasket.printBasketContents();
+        System.out.println(productBasket.removeProductByBasket("Course C+++"));
         System.out.println(productBasket.getTotalBasketValue());
         System.out.println(productBasket.checkProductContainsInBasket("Course Java"));
         System.out.println(productBasket.checkProductContainsInBasket("Course С"));
@@ -51,15 +55,15 @@ public class App {
                 new Article("Course Python", "Base knowledge")
         };
 
-        SearchEngine searchEngine = new SearchEngine(10);
+        SearchEngine searchEngine = new SearchEngine();
 
         for (Searchable searchable : searchables) {
             searchEngine.add(searchable);
         }
 
-        System.out.println(Arrays.toString(searchEngine.search("Course")));
-        System.out.println(Arrays.toString(searchEngine.search("rules")));
-        System.out.println(Arrays.toString(searchEngine.search("Course C++")));
+        System.out.println(searchEngine.search("Course"));
+        System.out.println(searchEngine.search("rules"));
+        System.out.println(searchEngine.search("Course C++"));
 
         try {
             SimpleProduct simpleProduct = new SimpleProduct("Course Java", 0);
