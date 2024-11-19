@@ -1,26 +1,22 @@
 package org.skypro.skyshop.service;
 
-import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import org.skypro.skyshop.model.Product;
 
 public class ProductBasket {
 
-    private final Product[] products = new Product[5];
+    private final List<Product> products;
+
+    public ProductBasket() {
+        this.products = new ArrayList<>();
+    }
 
     public void addProduct(Product product) {
-        boolean isBasketFull = true;
-        for (int i = 0; i < products.length; i++) {
-            if (isNull(products[i])) {
-                products[i] = product;
-                isBasketFull = false;
-                break;
-            }
-        }
-        if (isBasketFull) {
-            System.out.println("Невозможно добавить продукт");
-        }
+        products.add(product);
     }
 
     public int getTotalBasketValue() {
@@ -55,19 +51,32 @@ public class ProductBasket {
 
     public boolean checkProductContainsInBasket(String productName) {
         for (Product product : products) {
-            if (nonNull(product) && productName.equals(product.getNameProduct())) {
+            if (nonNull(product) && product.getNameProduct().equals(productName)) {
                 return true;
             }
         }
         return false;
     }
 
-    public void clearBasket() {
-        for (int i = 0; i < products.length; i++) {
-            if (nonNull(products[i])) {
-                products[i] = null;
+    public List<Product> removeProductByBasket(String productName) {
+        List<Product> result = new ArrayList<>();
+        int count = 0;
+        Iterator<Product> productIterator = products.iterator();
+        while (productIterator.hasNext()) {
+            if (productIterator.next().getNameProduct().equals(productName)) {
+                result.add(products.get(count--));
+                productIterator.remove();
             }
+            count++;
         }
+        if (result.isEmpty()) {
+            System.out.println("Список пуст");
+        }
+        return result;
+    }
+
+    public void clearBasket() {
+        products.clear();
     }
 
 }
