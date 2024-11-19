@@ -31,7 +31,7 @@ public class App {
 
         productBasket.printBasketContents();
         System.out.println();
-        System.out.println(productBasket.removeProductByBasket("Course C++"));
+        System.out.println(productBasket.removeProductByBasket("Course Java"));
         System.out.println();
         productBasket.printBasketContents();
         System.out.println(productBasket.removeProductByBasket("Course C+++"));

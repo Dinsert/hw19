@@ -59,14 +59,16 @@ public class ProductBasket {
     }
 
     public List<Product> removeProductByBasket(String productName) {
-        List<Product> result = new ArrayList<>(products);
+        List<Product> result = new ArrayList<>();
+        int count = 0;
         Iterator<Product> productIterator = products.iterator();
         while (productIterator.hasNext()) {
             if (productIterator.next().getNameProduct().equals(productName)) {
+                result.add(products.get(count--));
                 productIterator.remove();
             }
+            count++;
         }
-        result.removeAll(products);
         if (result.isEmpty()) {
             System.out.println("Список пуст");
         }
